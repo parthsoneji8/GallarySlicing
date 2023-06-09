@@ -22,6 +22,7 @@ class _FirstScreenState extends State<FirstScreen> {
   bool savephoto = false;
   List<AlbumModel> albums;
   List<VideoFIles> videos;
+  List<AlbumModel> originalAlbums;
   List<String> preloadedThumbnails = [];
   int index = 0;
   ValueNotifier<bool> isPhotopressNotifier = ValueNotifier<bool>(true);
@@ -61,6 +62,7 @@ class _FirstScreenState extends State<FirstScreen> {
 
     setState(() {
       albums = validAlbums;
+      originalAlbums = List.from(validAlbums);
     });
   }
   Future<void> videoPath() async {
@@ -155,19 +157,19 @@ class _FirstScreenState extends State<FirstScreen> {
                                 builder: (context, value, child) {
                                   return value
                                       ? Image.asset(
-                                          "images/gallary_First/photos_press.png",
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              6,
-                                        )
+                                    "images/gallary_First/photos_press.png",
+                                    width: MediaQuery.of(context)
+                                        .size
+                                        .width /
+                                        6,
+                                  )
                                       : Image.asset(
-                                          "images/gallary_First/photos_unpress.png",
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              6,
-                                        );
+                                    "images/gallary_First/photos_unpress.png",
+                                    width: MediaQuery.of(context)
+                                        .size
+                                        .width /
+                                        6,
+                                  );
                                 },
                               ),
                             ),
@@ -181,36 +183,36 @@ class _FirstScreenState extends State<FirstScreen> {
                                 builder: (context, value, child) {
                                   return !value
                                       ? Image.asset(
-                                          "images/gallary_First/videos_press.png",
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              6,
-                                        )
+                                    "images/gallary_First/videos_press.png",
+                                    width: MediaQuery.of(context)
+                                        .size
+                                        .width /
+                                        6,
+                                  )
                                       : Image.asset(
-                                          "images/gallary_First/videos_unpress.png",
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              6,
-                                        );
+                                    "images/gallary_First/videos_unpress.png",
+                                    width: MediaQuery.of(context)
+                                        .size
+                                        .width /
+                                        6,
+                                  );
                                 },
                               ),
                             ),
                             const SizedBox(width: 10),
                             savephoto
                                 ? Image(
-                                    image: const AssetImage(
-                                        "images/gallary_First/save_press.png"),
-                                    width:
-                                        MediaQuery.of(context).size.width / 6.5,
-                                  )
+                              image: const AssetImage(
+                                  "images/gallary_First/save_press.png"),
+                              width:
+                              MediaQuery.of(context).size.width / 6.5,
+                            )
                                 : Image(
-                                    image: const AssetImage(
-                                        "images/gallary_First/save_unpress.png"),
-                                    width:
-                                        MediaQuery.of(context).size.width / 6.5,
-                                  )
+                              image: const AssetImage(
+                                  "images/gallary_First/save_unpress.png"),
+                              width:
+                              MediaQuery.of(context).size.width / 6.5,
+                            )
                           ],
                         ),
                       ),
@@ -248,13 +250,13 @@ class _FirstScreenState extends State<FirstScreen> {
                     decoration: const BoxDecoration(
                       image: DecorationImage(
                         image:
-                            AssetImage("images/gallary_First/bottom_box.png"),
+                        AssetImage("images/gallary_First/bottom_box.png"),
                         fit: BoxFit.fitWidth,
                       ),
                     ),
                     child: Padding(
                       padding:
-                          const EdgeInsets.only(top: 10, left: 8, right: 8),
+                      const EdgeInsets.only(top: 10, left: 8, right: 8),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -266,15 +268,15 @@ class _FirstScreenState extends State<FirstScreen> {
                             },
                             child: albumStatus
                                 ? Image.asset(
-                                    "images/gallary_First/albums_press.png",
-                                    width:
-                                        MediaQuery.of(context).size.width / 6,
-                                  )
+                              "images/gallary_First/albums_press.png",
+                              width:
+                              MediaQuery.of(context).size.width / 6,
+                            )
                                 : Image.asset(
-                                    "images/gallary_First/albums_unpress.png",
-                                    width:
-                                        MediaQuery.of(context).size.width / 6,
-                                  ),
+                              "images/gallary_First/albums_unpress.png",
+                              width:
+                              MediaQuery.of(context).size.width / 6,
+                            ),
                           ),
                           const SizedBox(width: 20),
                           GestureDetector(
@@ -285,15 +287,15 @@ class _FirstScreenState extends State<FirstScreen> {
                             },
                             child: !albumStatus
                                 ? Image.asset(
-                                    "images/gallary_First/status_press.png",
-                                    width:
-                                        MediaQuery.of(context).size.width / 6,
-                                  )
+                              "images/gallary_First/status_press.png",
+                              width:
+                              MediaQuery.of(context).size.width / 6,
+                            )
                                 : Image.asset(
-                                    "images/gallary_First/status_unpress.png",
-                                    width:
-                                        MediaQuery.of(context).size.width / 6,
-                                  ),
+                              "images/gallary_First/status_unpress.png",
+                              width:
+                              MediaQuery.of(context).size.width / 6,
+                            ),
                           ),
                         ],
                       ),
@@ -306,7 +308,7 @@ class _FirstScreenState extends State<FirstScreen> {
     );
   }
   Widget buildAlbumsGridView() {
-    if (albums == null || albums.isEmpty) {
+    if (originalAlbums == null || originalAlbums.isEmpty) {
       return const Center(
         child: CircularProgressIndicator(),
       );
@@ -321,20 +323,18 @@ class _FirstScreenState extends State<FirstScreen> {
           crossAxisCount: 2,
         ),
         shrinkWrap: true,
-        itemCount: albums.length,
+        itemCount: originalAlbums.length,
         itemBuilder: (BuildContext context, int index) {
-          final album = albums[index];
+          final album = originalAlbums[index];
           return GestureDetector(
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) {
-                    return Second_Screen(
+                    builder: (context) => Second_Screen(
                       images: album.files,
                       name: album.folderName,
-                    );
-                  },
+                    )
                 ),
               );
             },
@@ -389,7 +389,6 @@ class _FirstScreenState extends State<FirstScreen> {
         child: CircularProgressIndicator(),
       );
     }
-
     return Padding(
       padding: const EdgeInsets.only(top: 20),
       child: GridView.builder(
@@ -446,19 +445,36 @@ class _FirstScreenState extends State<FirstScreen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Container(
-                                  height: MediaQuery.of(context).size.height / 4.2,
-                                  width: MediaQuery.of(context).size.width,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(25),
-                                  ),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(25),
-                                    child: Image.file(
-                                      File(snapshot.data),
-                                      fit: BoxFit.cover,
+                                Stack(
+                                  children: [
+                                    Container(
+                                      height: MediaQuery.of(context).size.height / 4.2,
+                                      width: MediaQuery.of(context).size.width,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(25),
+                                      ),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(25),
+                                        child: Image.file(
+                                          File(snapshot.data),
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
                                     ),
-                                  ),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        gradient: const LinearGradient(
+                                          colors: [
+                                            Colors.black54,
+                                            Colors.transparent
+                                          ],
+                                          begin: Alignment.bottomCenter,
+                                          end: Alignment.center,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                                 const SizedBox(height: 15),
                                 Padding(

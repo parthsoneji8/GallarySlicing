@@ -29,12 +29,13 @@ class _Second_ScreenState extends State<Second_Screen> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                SizedBox(height: 10,),
+                const SizedBox(height: 10,),
                 Row(
                   children: [
                     const SizedBox(width: 10),
                     Text(
                       widget.name,
+                      maxLines: 1,
                       style: const TextStyle(fontSize: 20, color: Colors.white),
                     ),
                     const Expanded(child: SizedBox()),
@@ -45,7 +46,7 @@ class _Second_ScreenState extends State<Second_Screen> {
                     const SizedBox(width: 10),
                   ],
                 ),
-                SizedBox(height: 10,),
+                const SizedBox(height: 10,),
                 Padding(
                   padding: const EdgeInsets.all(14.0),
                   child: SizedBox(

@@ -66,3 +66,9 @@ class Files {
     return data;
   }
 }
+class Video {
+  VideoFIles videoFiles;
+  String thumbnails;
+
+  Video({required this.videoFiles, required this.thumbnails});
+}
